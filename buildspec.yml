@@ -6,6 +6,7 @@ phases:
       - echo Entered the build phase ...
       - echo Build started on `date`
       - cd $CODEBUILD_SRC_DIR
+      - git submodule update --init --recursive
       - hugo --quiet
     finally:
       - echo Building the HTML files finished
