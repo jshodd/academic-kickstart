@@ -51,9 +51,6 @@ social:
 - icon: linkedin
   icon_pack: fab
   link: https://linkedin.com/in/jshodd
-- icon: cv
-  icon_pack: ai
-  link: files/cv.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ""
