@@ -60,7 +60,7 @@ email: ""
 --- 
 
 I'm an engineer at heart who likes to build things, break things, and build
-things that break other things. I started my career working in a devops shop and
+things that break things. I started my career working in a devops shop and
 carry those mentalities with me as I venture further into the Security industry.
 I have a strong focus on AWS and cloud security, but I am working my way towards
 the Offensive Security space.
