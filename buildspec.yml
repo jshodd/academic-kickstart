@@ -11,7 +11,7 @@ phases:
       - git submodule add https://github.com/gcushen/hugo-academic.git themes/academic
       - cd themes/academic
       - git checkout v4.4.0
-      - cd ..
+      - cd ../..
       - hugo --quiet
     finally:
       - echo Building the HTML files finished
