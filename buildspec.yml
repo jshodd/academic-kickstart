@@ -6,6 +6,12 @@ phases:
       - echo Entered the build phase ...
       - echo Build started on `date`
       - cd $CODEBUILD_SRC_DIR
+      - rm -rf themes/academic
+      - git init
+      - git submodule add https://github.com/gcushen/hugo-academic.git themes/academic
+      - cd themes/academic
+      - git checkout v4.4.0
+      - cd ..
       - hugo --quiet
     finally:
       - echo Building the HTML files finished
