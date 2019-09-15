@@ -139,8 +139,10 @@ $ stty rows <num> columns <cols>
 
 ---
 # File Transferring
+
 ## Via NetCat
   - Using NetCat
+
 ```bash
 #On the Receiving Machine
 nc -l -p 9999 > received_file.txt
@@ -151,6 +153,7 @@ nc 10.10.10.10 9999 < received_file.txt
  
 
 ## Via FTP
+
   - Using FTP
 ```bash
 # In Kali
