@@ -99,7 +99,25 @@ rpcclient -U "" 10.10.10.10
 ```bash
 smbclient //MOUNT/share
 ```
+  - Getting the version of Samba:
   
+```bash
+# Originally from: https://0xdf.gitlab.io/2018/12/02/pwk-notes-smb-enumeration-checklist-update1.html#enum4linux
+#!/bin/sh
+#Author: rewardone
+#Description:
+# Requires root or enough permissions to use tcpdump
+# Will listen for the first 7 packets of a null login
+# and grab the SMB Version
+#Notes:
+# Will sometimes not capture or will print multiple
+# lines. May need to run a second time for success.
+if [ -z $1 ]; then echo "Usage: ./smbver.sh RHOST {RPORT}" && exit; else rhost=$1; fi
+if [ ! -z $2 ]; then rport=$2; else rport=139; fi
+tcpdump -s0 -n -i tap0 src $rhost and port $rport -A -c 7 2>/dev/null | grep -i "samba\|s.a.m" | tr -d '.' | grep -oP 'UnixSamba.*[0-9a-z]' | tr -d '\n' & echo -n "$rhost: " &
+echo "exit" | smbclient -L $rhost 1>/dev/null 2>/dev/null
+sleep 0.5 && echo ""
+```
 ## SNMP
 
   - snmp-check
@@ -135,6 +153,13 @@ if the endpoint you are scanning is using ssl, but has an invalid certificate th
 wpscan -u 10.10.10.10 port
 ```
 
+## Oracle Databases
+
+  - Oscanner
+  
+```bash
+oscanner -s 10.10.10.10. -p 1521
+```
 ---
 # File Transferring
 
@@ -367,4 +392,17 @@ $ reset
 $ export SHELL=bash
 $ export TERM=xterm-256color
 $ stty rows <num> columns <cols>
+```
+  - Measure the amount of network bandwidth with iptables
+
+```bash
+$ iptables -I INPUT 1 -s 10.10.10.10 -j ACCEPT
+$ iptables -I OUTPUT 1 -d 10.10.10.10 -j ACCEPT
+$ iptables -Z
+$ nmap -sT 10.10.10.10
+.
+.
+.
+.
+$ iptables -vn -L
 ```
