@@ -351,6 +351,18 @@ xhost +<targetip>
 ---
 # Scripts
 
+  - Using python to send requests to outdated or self signed SSL Certs 
+```python
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += 'HIGH:!DH:!aNULL'
+
+r = requests.post("https://10.10.10.10/form.php",data={'ID':'1004'},verify=False)
+print(r.text)
+```
 ---
 # Web Application Testing
 
