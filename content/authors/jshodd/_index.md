@@ -15,7 +15,7 @@ role: Security Engineer
 # Organizations/Affiliations
 organizations:
 - name: Red Ventures
-  url: ""
+  url: "https://redventures.com"
 
 # Short bio (displayed in user profile at end of posts)
 bio: I'm an engineer who likes to build things, break things, and build things that break things. 
@@ -44,7 +44,7 @@ bio: I'm an engineer who likes to build things, break things, and build things t
 social:
 - icon: envelope
   icon_pack: fas
-  link: "mailto:jacobshodd@gmail.com"
+  link: "mailto:me@jacobshodd.com"
 - icon: github
   icon_pack: fab
   link: https://github.com/jshodd
@@ -62,9 +62,9 @@ email: ""
 I'm an engineer at heart who likes to build things, break things, and build
 things that break things. I started my career working in a devops shop and
 carry those mentalities with me as I venture further into the Security industry.
-I have a strong focus on AWS and cloud security, but I am working my way towards
-the Offensive Security space.
-
-This website is a place for me to document what I'm working on and hopefully
-help others who are trying to learn.
+I'm currently a Security Engineer and work on anything ranging from building 
+automation and threat assessment tooling for over 200 AWS accounts to assisting 
+with PCI compliance penetration tests. I have a strong passion for Offensive Security 
+and am actively working towards my OSCP as well as gaining real world experience
+ while at work. For a look at what I'm working on check out my [Wiki](https://wiki.jacobshodd.com).
 
