@@ -10,7 +10,7 @@ authors:
 superuser: true
 
 # Role/position
-role: Security Engineer
+role: OSCP | Security Engineer
 
 # Organizations/Affiliations
 organizations:
@@ -60,11 +60,14 @@ email: ""
 --- 
 
 I'm an engineer at heart who likes to build things, break things, and build
-things that break things. I started my career working in a devops shop and
-carry those mentalities with me as I venture further into the Security industry.
-I'm currently a Security Engineer and work on anything ranging from building 
-automation and threat assessment tooling for over 200 AWS accounts to assisting 
-with PCI compliance penetration tests. I have a strong passion for Offensive Security 
-and am actively working towards my OSCP as well as gaining real world experience
- while at work. For a look at what I'm working on check out my [Wiki](https://wiki.jacobshodd.com).
+things that break things. I started my career working in a devops shop and carry
+those mentalities with me as I venture further into the Security industry. I'm
+currently a Security Engineer and work on anything ranging from building
+automation and threat assessment tooling for over 200 AWS accounts to assisting
+with PCI compliance penetration tests. I have a strong passion for Security and
+have recently obtained my OSCP certification from Offensive Security. I'm always
+looking to learn more about security in my free time, whether that be Capture
+the Flags, Reverse Engineering, AppSec, etc. For a look at what I'm working on
+check out my new [Wiki](https://wiki.jacobshodd.com). It may be a bit sparse at
+the moment, but I'll be adding content as I work on new projects.
 
